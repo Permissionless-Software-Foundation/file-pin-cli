@@ -24,6 +24,9 @@ import IPFSFileInfo from './src/commands/file-info.js'
 import WalletService from './src/commands/wallet-service.js'
 import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
+import PinStatus from './src/commands/pin-status.js'
+import UnprocessedPins from './src/commands/unprocessed-pins.js'
+
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
 const walletList = new WalletList()
@@ -43,6 +46,8 @@ const ipfsFileDownload = new IPFSFileDownload()
 const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
+const pinStatus = new PinStatus()
+const unprocessedPins = new UnprocessedPins()
 
 program
   // Define the psf-bch-wallet app options
@@ -146,5 +151,14 @@ program.command('pin-claim')
   .option('-a, --address <string>', 'Address to claim the pin to (required)')
   .option('-c, --cid <string>', 'CID of the file (required)')
   .action(ipfsPinClaim.run)
+
+program.command('pin-status')
+  .description('Get the pin-status of a CID')
+  .option('-c, --cid <string>', 'CID of the file to get the pin-status of')
+  .action(pinStatus.run)
+
+program.command('unprocessed-pins')
+  .description('Get all DB entries with a validClaim property of null.')
+  .action(unprocessedPins.run)
 
 program.parseAsync(process.argv)

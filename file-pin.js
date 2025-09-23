@@ -26,6 +26,7 @@ import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
 import PinStatus from './src/commands/pin-status.js'
 import UnprocessedPins from './src/commands/unprocessed-pins.js'
+import IPFSRepin from './src/commands/reprocess.js'
 
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
@@ -48,6 +49,7 @@ const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
 const pinStatus = new PinStatus()
 const unprocessedPins = new UnprocessedPins()
+const ipfsRepin = new IPFSRepin()
 
 program
   // Define the psf-bch-wallet app options
@@ -160,5 +162,10 @@ program.command('pin-status')
 program.command('unprocessed-pins')
   .description('Get all DB entries with a validClaim property of null.')
   .action(unprocessedPins.run)
+
+program.command('reprocess')
+  .description('Repin a CID if it has a validClaim property of null.')
+  .option('-c, --cid <string>', 'CID of the file to repin')
+  .action(ipfsRepin.run)
 
 program.parseAsync(process.argv)

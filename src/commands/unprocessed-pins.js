@@ -25,6 +25,7 @@ class UnprocessedPins {
       // Get the metadata from the file info.
 
       console.log(fileInfo)
+      console.log(`There are ${fileInfo.length} unprocessed pins.`)
 
       return true
     } catch (err) {

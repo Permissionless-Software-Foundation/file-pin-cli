@@ -20,7 +20,6 @@ import IPFSStatus from './src/commands/ipfs-status.js'
 import IPFSPeers from './src/commands/ipfs-peers.js'
 import IPFSRelays from './src/commands/ipfs-relays.js'
 import IPFSConnect from './src/commands/ipfs-connect.js'
-import IPFSFileInfo from './src/commands/file-info.js'
 import WalletService from './src/commands/wallet-service.js'
 import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
@@ -42,7 +41,6 @@ const ipfsStatus = new IPFSStatus()
 const ipfsPeers = new IPFSPeers()
 const ipfsRelays = new IPFSRelays()
 const ipfsConnect = new IPFSConnect()
-const ipfsFileInfo = new IPFSFileInfo()
 const ipfsFileDownload = new IPFSFileDownload()
 const walletService = new WalletService()
 const program = new Command()
@@ -130,11 +128,6 @@ program.command('ipfs-connect')
   .option('-m, --multiaddr <string>', 'Multiaddr of the peer to connect to')
   .option('-d, --details', 'Get details about the peer')
   .action(ipfsConnect.run)
-
-program.command('file-info')
-  .description('Get information about a file in IPFS')
-  .option('-c, --cid <string>', 'CID of the file to get information about')
-  .action(ipfsFileInfo.run)
 
 program.command('file-download')
   .description('Download a file from IPFS to the files/ directory')

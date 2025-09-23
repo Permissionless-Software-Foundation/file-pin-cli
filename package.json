@@ -1,8 +1,8 @@
 {
-  "name": "psf-ipfs",
+  "name": "file-pin-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "psf-ipfs.js",
+  "main": "file-pin-cli.js",
   "type": "module",
   "scripts": {
     "test": "c8 --reporter=text mocha --exit --timeout 15000 --recursive test/unit",

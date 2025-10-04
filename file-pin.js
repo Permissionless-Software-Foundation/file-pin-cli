@@ -20,10 +20,13 @@ import IPFSStatus from './src/commands/ipfs-status.js'
 import IPFSPeers from './src/commands/ipfs-peers.js'
 import IPFSRelays from './src/commands/ipfs-relays.js'
 import IPFSConnect from './src/commands/ipfs-connect.js'
-import IPFSFileInfo from './src/commands/file-info.js'
 import WalletService from './src/commands/wallet-service.js'
 import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
+import PinStatus from './src/commands/pin-status.js'
+import UnprocessedPins from './src/commands/unprocessed-pins.js'
+import IPFSRepin from './src/commands/reprocess.js'
+
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
 const walletList = new WalletList()
@@ -38,11 +41,13 @@ const ipfsStatus = new IPFSStatus()
 const ipfsPeers = new IPFSPeers()
 const ipfsRelays = new IPFSRelays()
 const ipfsConnect = new IPFSConnect()
-const ipfsFileInfo = new IPFSFileInfo()
 const ipfsFileDownload = new IPFSFileDownload()
 const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
+const pinStatus = new PinStatus()
+const unprocessedPins = new UnprocessedPins()
+const ipfsRepin = new IPFSRepin()
 
 program
   // Define the psf-bch-wallet app options
@@ -124,11 +129,6 @@ program.command('ipfs-connect')
   .option('-d, --details', 'Get details about the peer')
   .action(ipfsConnect.run)
 
-program.command('file-info')
-  .description('Get information about a file in IPFS')
-  .option('-c, --cid <string>', 'CID of the file to get information about')
-  .action(ipfsFileInfo.run)
-
 program.command('file-download')
   .description('Download a file from IPFS to the files/ directory')
   .option('-c, --cid <string>', 'CID of the file to download')
@@ -146,5 +146,19 @@ program.command('pin-claim')
   .option('-a, --address <string>', 'Address to claim the pin to (required)')
   .option('-c, --cid <string>', 'CID of the file (required)')
   .action(ipfsPinClaim.run)
+
+program.command('pin-status')
+  .description('Get the pin-status of a CID')
+  .option('-c, --cid <string>', 'CID of the file to get the pin-status of')
+  .action(pinStatus.run)
+
+program.command('unprocessed-pins')
+  .description('Get all DB entries with a validClaim property of null.')
+  .action(unprocessedPins.run)
+
+program.command('reprocess')
+  .description('Repin a CID if it has a validClaim property of null.')
+  .option('-c, --cid <string>', 'CID of the file to repin')
+  .action(ipfsRepin.run)
 
 program.parseAsync(process.argv)

@@ -1,12 +1,12 @@
 /*
-  Get information about a file in IPFS
+  Get all DB entries with a validClaim property of null.
 */
 
 // Global npm libraries
 import axios from 'axios'
 import config from '../../config/index.js'
 
-class IPFSFileInfo {
+class UnprocessedPins {
   constructor () {
     // Encapsulate Dependencies
     this.axios = axios
@@ -25,6 +25,7 @@ class IPFSFileInfo {
       // Get the metadata from the file info.
 
       console.log(fileInfo)
+      console.log(`There are ${fileInfo.length} unprocessed pins.`)
 
       return true
     } catch (err) {
@@ -36,20 +37,23 @@ class IPFSFileInfo {
   // Get information about a file in IPFS.
   async getInfo (flags) {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/ipfs/file-info/${flags.cid}`)
+      const response = await this.axios.get(`${this.config.restURL}/ipfs/unprocessed-pins`)
       // console.log('response: ', response)
 
       const { data } = response
 
-      if (!data.success) {
-        throw new Error(data.message)
-      }
+      // if (!data.success) {
+      //   throw new Error(data.message)
+      // }
 
-      const info = data.fileMetadata
-      // If the metadata is not found, throw an error.
-      if (!info || !info.cid) {
-        throw new Error(`CID ${flags.cid} not found!`)
-      }
+      // const info = data.fileMetadata
+      // // If the metadata is not found, throw an error.
+      // if (!info || !info.cid) {
+      //   throw new Error(`CID ${flags.cid} not found!`)
+      // }
+
+      const info = data
+
       return info
     } catch (err) {
       console.log('Error in getInfo()', err)
@@ -60,13 +64,13 @@ class IPFSFileInfo {
   // Validate the command line flags.
   validateFlags (flags = {}) {
     // Multiaddr is required.
-    const cid = flags.cid
-    if (!cid || cid === '') {
-      throw new Error('You must specify a CID with the -c flag.')
-    }
+    // const cid = flags.cid
+    // if (!cid || cid === '') {
+    //   throw new Error('You must specify a CID with the -c flag.')
+    // }
 
     return true
   }
 }
 
-export default IPFSFileInfo
+export default UnprocessedPins

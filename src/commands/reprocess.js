@@ -40,7 +40,7 @@ class IPFSRepin {
   // Repin a CID.
   async pinClaim (fileInfo) {
     try {
-      const response = await this.axios.post(`${this.config.restURL}/ipfs/pin-claim/`, fileInfo)
+      const response = await this.axios.post(`${this.config.walletUrl}/ipfs/pin-claim/`, fileInfo)
       console.log('response: ', response)
 
       const { data } = response
@@ -56,7 +56,7 @@ class IPFSRepin {
   // Get information about a file in IPFS.
   async getInfo (flags) {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/ipfs/pin-status/${flags.cid}`)
+      const response = await this.axios.get(`${this.config.walletUrl}/ipfs/pin-status/${flags.cid}`)
       // console.log('response: ', response)
 
       const { data } = response

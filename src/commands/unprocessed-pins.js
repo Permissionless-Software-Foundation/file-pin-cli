@@ -37,7 +37,7 @@ class UnprocessedPins {
   // Get information about a file in IPFS.
   async getInfo (flags) {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/ipfs/unprocessed-pins`)
+      const response = await this.axios.get(`${this.config.walletUrl}/ipfs/unprocessed-pins`)
       // console.log('response: ', response)
 
       const { data } = response

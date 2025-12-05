@@ -51,7 +51,7 @@ class WalletUtil {
 
       // Use info from the config file on how to initialize the wallet lib.
       const advancedConfig = {}
-      advancedConfig.restURL = this.config.restURL
+      advancedConfig.restURL = this.config.walletUrl
       advancedConfig.interface = this.config.interface
       advancedConfig.hdPath = walletData.hdPath
 

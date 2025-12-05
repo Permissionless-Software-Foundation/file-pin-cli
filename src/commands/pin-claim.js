@@ -35,7 +35,7 @@ class IPFSPinClaim {
   // processPinClaim
   async pinClaim (flags) {
     try {
-      const response = await this.axios.post(`${this.config.restURL}/ipfs/pin-claim/`, flags)
+      const response = await this.axios.post(`${this.config.pinService}/ipfs/pin-claim/`, flags)
       // console.log('response: ', response)
 
       const { data } = response

@@ -26,6 +26,11 @@ class PinStatus {
 
       console.log(fileInfo)
 
+      // Check if the pin claim has expired
+      if (new Date(fileInfo.expirationTime) < new Date()) {
+        console.log('⚠️  WARNING: The pin claim has expired!')
+      }
+
       return true
     } catch (err) {
       console.error('Error in file-info :', err.message)
@@ -52,6 +57,18 @@ class PinStatus {
       // }
 
       const info = data
+
+      // Add claimTime and expirationTime if claimTxDetails.time exists
+      if (info.claimTxDetails && info.claimTxDetails.time !== undefined && info.claimTxDetails.time !== null) {
+        // Convert Unix timestamp (seconds) to Date object (milliseconds)
+        const claimDate = new Date(info.claimTxDetails.time * 1000)
+        info.claimTime = claimDate.toISOString()
+
+        // Calculate expiration time (one year later)
+        const expirationDate = new Date(claimDate)
+        expirationDate.setFullYear(expirationDate.getFullYear() + 1)
+        info.expirationTime = expirationDate.toISOString()
+      }
 
       return info
     } catch (err) {

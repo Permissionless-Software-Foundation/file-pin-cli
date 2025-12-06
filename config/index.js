@@ -15,7 +15,7 @@ const config = {
 
   // The URL for the IPFS pin service.
   // pinService: 'http://localhost:5031',
-  pinService: 'http://5.78.118.142:5031',
+  pinService: 'http://5.78.118.142:5031'
 }
 
 export default config

@@ -20,7 +20,7 @@ class WalletService {
   async run (flags) {
     try {
       // Show consumer url
-      console.log(`Wallet Consumer URL : ${this.config.restURL}`)
+      console.log(`Wallet Consumer URL : ${this.config.walletUrl}`)
 
       // Show wallet service provider
       const bchService = await this.getBCHServiceInfo(flags)
@@ -40,7 +40,7 @@ class WalletService {
   //  Get Wallet Service Information
   async getBCHServiceInfo () {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/bch/service`)
+      const response = await this.axios.get(`${this.config.walletUrl}/bch/service`)
       return response.data
     } catch (err) {
       console.log('Error in getBCHServiceInfo()')
@@ -51,7 +51,7 @@ class WalletService {
   //  Get IPFS Service Information
   async getIPFSServiceInfo () {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/ipfs/service`)
+      const response = await this.axios.get(`${this.config.walletUrl}/ipfs/service`)
       return response.data
     } catch (err) {
       console.log('Error in getIPFSServiceInfo()')

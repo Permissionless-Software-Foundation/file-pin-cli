@@ -36,7 +36,7 @@ class IPFSConnect {
   // Try to connect to an IPFS peer.
   async connect (flags) {
     try {
-      const response = await this.axios.post(`${this.config.restURL}/ipfs/connect`, {
+      const response = await this.axios.post(`${this.config.walletUrl}/ipfs/connect`, {
         multiaddr: flags.multiaddr,
         getDetails: flags.details
       })

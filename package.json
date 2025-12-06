@@ -17,6 +17,7 @@
     "collect.js": "4.36.1",
     "commander": "12.1.0",
     "minimal-slp-wallet": "5.12.1",
+    "psffpp": "1.2.0",
     "shelljs": "0.8.5"
   },
   "devDependencies": {

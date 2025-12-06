@@ -31,7 +31,7 @@ class IPFSPeers {
   // Get Peers data from the IPFS node.
   async getNodePeers (flags = {}) {
     try {
-      const response = await this.axios.post(`${this.config.restURL}/ipfs/peers`, {
+      const response = await this.axios.post(`${this.config.walletUrl}/ipfs/peers`, {
         showAll: flags.all
       })
       return response.data.peers

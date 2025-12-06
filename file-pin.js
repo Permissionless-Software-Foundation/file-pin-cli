@@ -24,6 +24,7 @@ import WalletService from './src/commands/wallet-service.js'
 import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
 import PinStatus from './src/commands/pin-status.js'
+import PinRenew from './src/commands/pin-renew.js'
 import UnprocessedPins from './src/commands/unprocessed-pins.js'
 import IPFSRepin from './src/commands/reprocess.js'
 
@@ -46,6 +47,7 @@ const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
 const pinStatus = new PinStatus()
+const pinRenew = new PinRenew()
 const unprocessedPins = new UnprocessedPins()
 const ipfsRepin = new IPFSRepin()
 
@@ -151,6 +153,12 @@ program.command('pin-status')
   .description('Get the pin-status of a CID')
   .option('-c, --cid <string>', 'CID of the file to get the pin-status of')
   .action(pinStatus.run)
+
+program.command('pin-renew')
+  .description('Renew an expired pin claim for a CID')
+  .option('-c, --cid <string>', 'CID of the file to renew')
+  .option('-n, --name <string>', 'wallet name to pay for renewal')
+  .action(pinRenew.run)
 
 program.command('unprocessed-pins')
   .description('Get all DB entries with a validClaim property of null.')

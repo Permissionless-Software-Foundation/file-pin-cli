@@ -64,7 +64,7 @@ class IPFSDownload {
       writableStream.on('finish', this.writeStreamFinished)
 
       // Get the readable stream for the file
-      const result = await this.axios.get(`${this.config.restURL}/ipfs/download/${flags.cid}`, { responseType: 'stream' })
+      const result = await this.axios.get(`${this.config.pinService}/ipfs/download/${flags.cid}`, { responseType: 'stream' })
       const fileReadStream = result.data
 
       for await (const buf of fileReadStream) {
@@ -96,16 +96,12 @@ class IPFSDownload {
   // Get information about a file in IPFS.
   async getInfo (flags) {
     try {
-      const response = await this.axios.get(`${this.config.restURL}/ipfs/file-info/${flags.cid}`)
+      const response = await this.axios.get(`${this.config.pinService}/ipfs/pin-status/${flags.cid}`)
       // console.log('response: ', response)
 
       const { data } = response
 
-      if (!data.success) {
-        throw new Error(data.message)
-      }
-
-      const info = data.fileMetadata
+      const info = data
       // If the metadata is not found, throw an error.
       if (!info || !info.cid) {
         throw new Error(`CID ${flags.cid} not found!`)

@@ -7,14 +7,15 @@
 
 const config = {
   // The REST URL for the server used by minimal-slp-wallet.
-  // restURL: 'https://free-bch.fullstack.cash',
-  // restURL: 'https://dev-consumer.psfoundation.info',
-  // restURL: 'http://localhost:5031',
-  restURL: 'http://192.168.2.127:5031',
+  walletUrl: 'https://free-bch.fullstack.cash',
 
   // consumer-api = web 3 Cash Stack (ipfs-bch-wallet-consumer)
   // rest-api = web 2 Cash Stack (bch-api)
-  interface: 'consumer-api'
+  interface: 'consumer-api',
+
+  // The URL for the IPFS pin service.
+  // pinService: 'http://localhost:5031',
+  pinService: 'http://5.78.118.142:5031'
 }
 
 export default config

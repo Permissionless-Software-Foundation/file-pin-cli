@@ -27,7 +27,7 @@ import PinStatus from './src/commands/pin-status.js'
 import PinRenew from './src/commands/pin-renew.js'
 import UnprocessedPins from './src/commands/unprocessed-pins.js'
 import IPFSRepin from './src/commands/reprocess.js'
-
+import IPFSPinUpload from './src/commands/pin-upload.js'
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
 const walletList = new WalletList()
@@ -50,7 +50,7 @@ const pinStatus = new PinStatus()
 const pinRenew = new PinRenew()
 const unprocessedPins = new UnprocessedPins()
 const ipfsRepin = new IPFSRepin()
-
+const ipfsPinUpload = new IPFSPinUpload()
 program
   // Define the psf-bch-wallet app options
   .name('psf-bch-wallet')
@@ -168,5 +168,9 @@ program.command('reprocess')
   .description('Repin a CID if it has a validClaim property of null.')
   .option('-c, --cid <string>', 'CID of the file to repin')
   .action(ipfsRepin.run)
+program.command('pin-upload')
+  .description('Upload and pin a file to IPFS')
+  .option('-f, --filename <string>', 'File Name (required)')
+  .action(ipfsPinUpload.run)
 
 program.parseAsync(process.argv)

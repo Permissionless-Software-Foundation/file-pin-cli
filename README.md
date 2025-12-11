@@ -104,3 +104,13 @@ Claim a pin on the PSF IPFS network.
 - Use `-f` to specify the file name (required).
 - Use `-a` to specify the address to claim the pin to (required).
 - Use `-c` to specify the CID of the file (required).
+
+#### Pin Upload
+
+Upload and pin a file.
+
+- `node file-pin.js pin-upload -f mutable-67ccefcca67097473e78ca10.json`
+
+##### Arguments
+- Use `-f` to specify the file name (required).
+

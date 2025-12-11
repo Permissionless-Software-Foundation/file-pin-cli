@@ -1,5 +1,5 @@
 /*
-Get the status of the IPFS node.
+  Get the status of the IPFS node.
 */
 
 // Global npm libraries

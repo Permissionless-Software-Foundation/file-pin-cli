@@ -28,6 +28,8 @@ import PinRenew from './src/commands/pin-renew.js'
 import UnprocessedPins from './src/commands/unprocessed-pins.js'
 import IPFSRepin from './src/commands/reprocess.js'
 import IPFSPinUpload from './src/commands/pin-upload.js'
+import ConsumerTest from './src/commands/consumer-test.js'
+
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
 const walletList = new WalletList()
@@ -51,6 +53,8 @@ const pinRenew = new PinRenew()
 const unprocessedPins = new UnprocessedPins()
 const ipfsRepin = new IPFSRepin()
 const ipfsPinUpload = new IPFSPinUpload()
+const consumerTest = new ConsumerTest()
+
 program
   // Define the psf-bch-wallet app options
   .name('psf-bch-wallet')
@@ -172,5 +176,8 @@ program.command('pin-upload')
   .description('Upload and pin a file to IPFS')
   .option('-f, --filename <string>', 'File Name (required)')
   .action(ipfsPinUpload.run)
+program.command('consumer-test')
+  .description('Test the consumer services')
+  .action(consumerTest.run)
 
 program.parseAsync(process.argv)

@@ -40,7 +40,7 @@ class IPFSStatus {
   // Get IPFS node status from the IPFS node.
   async getNodeStatus () {
     try {
-      const response = await this.axios.get(`${this.config.walletUrl}/ipfs`)
+      const response = await this.axios.get(`${this.config.pinService}/ipfs`)
       return response.data.status
     } catch (err) {
       console.log('Error in getNodeStatus()')

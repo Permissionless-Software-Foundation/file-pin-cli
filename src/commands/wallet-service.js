@@ -1,9 +1,11 @@
 /*
-Get Wallet Service Information
+  Get Wallet Service Information
 */
 
 // Global npm libraries
 import axios from 'axios'
+
+// Local libraries
 import config from '../../config/index.js'
 
 class WalletService {

@@ -24,6 +24,8 @@ import IPFSFileInfo from './src/commands/file-info.js'
 import WalletService from './src/commands/wallet-service.js'
 import IPFSFileDownload from './src/commands/file-download.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
+import ConsumerTest from './src/commands/consumer-test.js'
+
 // Instantiate the subcommands
 const walletCreate = new WalletCreate()
 const walletList = new WalletList()
@@ -43,6 +45,7 @@ const ipfsFileDownload = new IPFSFileDownload()
 const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
+const consumerTest = new ConsumerTest()
 
 program
   // Define the psf-bch-wallet app options
@@ -146,5 +149,9 @@ program.command('pin-claim')
   .option('-a, --address <string>', 'Address to claim the pin to (required)')
   .option('-c, --cid <string>', 'CID of the file (required)')
   .action(ipfsPinClaim.run)
+
+program.command('consumer-test')
+  .description('Test the consumer services')
+  .action(consumerTest.run)
 
 program.parseAsync(process.argv)

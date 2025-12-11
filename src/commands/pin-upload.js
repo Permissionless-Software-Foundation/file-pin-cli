@@ -7,6 +7,7 @@ import axios from 'axios'
 import config from '../../config/index.js'
 import fs from 'fs'
 import FormData from 'form-data'
+
 // Hack to get __dirname back.
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/
 import * as url from 'url'
@@ -52,8 +53,8 @@ class IPFSPinUpload {
 
       const axiosConfig = {
         headers: formData.getHeaders(),
-        maxContentLength: (10 ** 6) * 150, // 150MB
-        maxBodyLength: (10 ** 6) * 150 // 150MB
+        maxContentLength: 10 * 1024 * 1024 * 1024, // 10GB - matches server limit
+        maxBodyLength: 10 * 1024 * 1024 * 1024 // 10GB - matches server limit
       }
       formData.append('file', this.fs.createReadStream(filePath), flags.filename)
       const response = await this.axios.post(`${this.config.pinService}/ipfs/pin-local-file/`, formData, axiosConfig)

@@ -11,6 +11,10 @@ This software requires node.js v20 or higher. Instructions for installation:
 - `git clone https://github.com/Permissionless-Software-Foundation/psf-bch-wallet`
 - `cd psf-bch-wallet`
 - `npm install`
+- `cp .env.example .env`
+
+Customize the .env file to suite your needs. The defaults should work.
+
 
 ## Usage
 

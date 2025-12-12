@@ -21,7 +21,7 @@ import IPFSPeers from './src/commands/ipfs-peers.js'
 import IPFSRelays from './src/commands/ipfs-relays.js'
 import IPFSConnect from './src/commands/ipfs-connect.js'
 import WalletService from './src/commands/wallet-service.js'
-import IPFSFileDownload from './src/commands/file-download.js'
+import DownloadFile from './src/commands/download-file.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
 import PinStatus from './src/commands/pin-status.js'
 import PinRenew from './src/commands/pin-renew.js'
@@ -44,7 +44,7 @@ const ipfsStatus = new IPFSStatus()
 const ipfsPeers = new IPFSPeers()
 const ipfsRelays = new IPFSRelays()
 const ipfsConnect = new IPFSConnect()
-const ipfsFileDownload = new IPFSFileDownload()
+const downloadFile = new DownloadFile()
 const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
@@ -136,9 +136,9 @@ program.command('ipfs-connect')
   .action(ipfsConnect.run)
 
 program.command('file-download')
-  .description('Download a file from IPFS to the files/ directory')
+  .description('Download a file from IPFS to the files/ directory. This is for files that have a valid Pin Claim.')
   .option('-c, --cid <string>', 'CID of the file to download')
-  .action(ipfsFileDownload.run)
+  .action(downloadFile.run)
 
 program.command('wallet-service')
   .description('Get information about the wallet service providers')

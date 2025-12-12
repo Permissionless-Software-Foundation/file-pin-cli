@@ -12,7 +12,7 @@ import fs from 'fs'
 import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
-class IPFSDownload {
+class DownloadFile {
   constructor () {
     // Encapsulate Dependencies
     this.axios = axios
@@ -125,4 +125,4 @@ class IPFSDownload {
   }
 }
 
-export default IPFSDownload
+export default DownloadFile

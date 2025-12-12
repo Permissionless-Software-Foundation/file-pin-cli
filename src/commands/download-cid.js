@@ -12,7 +12,7 @@ import fs from 'fs'
 import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
-class IPFSDownload {
+class DownloadCid {
   constructor () {
     // Encapsulate Dependencies
     this.axios = axios
@@ -31,14 +31,14 @@ class IPFSDownload {
     try {
       this.validateFlags(flags)
 
-      const fileInfo = await this.getInfo(flags)
+      // const fileInfo = await this.getInfo(flags)
       // Get the metadata from the file info.
 
       // console.log(fileInfo)
 
-      const { filename } = fileInfo
+      // const { filename } = fileInfo
 
-      await this.downloadFile({ filename, flags })
+      await this.downloadFile({ flags })
 
       return true
     } catch (err) {
@@ -53,7 +53,8 @@ class IPFSDownload {
   // from an HTTP call.
   async downloadFile (inObj = {}) {
     try {
-      const { filename, flags } = inObj
+      const { flags } = inObj
+      const { filename, cid } = flags
 
       // console.log('__dirname: ', __dirname)
 
@@ -63,11 +64,16 @@ class IPFSDownload {
       writableStream.on('error', this.writeStreamError)
       writableStream.on('finish', this.writeStreamFinished)
 
+      console.log(`Starting download of CID: ${cid}...`)
+
       // Get the readable stream for the file
-      const result = await this.axios.get(`${this.config.pinService}/ipfs/download/${flags.cid}`, { responseType: 'stream' })
+      const result = await this.axios.get(`${this.config.pinService}/ipfs/download-cid/${cid}`, { responseType: 'stream' })
       const fileReadStream = result.data
 
+      let i = 0
       for await (const buf of fileReadStream) {
+        i++
+        console.log(`Downloading chunk ${i}`)
         writableStream.write(buf)
       }
       writableStream.end()
@@ -121,8 +127,13 @@ class IPFSDownload {
       throw new Error('You must specify a CID with the -c flag.')
     }
 
+    const filename = flags.filename
+    if (!filename || filename === '') {
+      throw new Error('You must specify a filename with the -f flag.')
+    }
+
     return true
   }
 }
 
-export default IPFSDownload
+export default DownloadCid

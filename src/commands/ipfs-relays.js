@@ -31,7 +31,7 @@ class IPFSRelays {
   // Get Relays data from the IPFS node.
   async getRelays () {
     try {
-      const response = await this.axios.post(`${this.config.walletUrl}/ipfs/relays`)
+      const response = await this.axios.post(`${this.config.pinService}/ipfs/relays`)
       return response.data.relays
     } catch (err) {
       console.log('Error in getRelays()', err)

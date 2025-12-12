@@ -11,7 +11,7 @@ import 'dotenv/config'
 const config = {
   // The REST URL for the server used by minimal-slp-wallet.
   // Can be overridden by WALLET_URL environment variable
-  restURL: process.env.WALLET_URL || 'https://free-bch.fullstack.cash',
+  walletUrl: process.env.WALLET_URL || 'https://free-bch.fullstack.cash',
 
   // consumer-api = web 3 Cash Stack (ipfs-bch-wallet-consumer)
   // rest-api = web 2 Cash Stack (bch-api)

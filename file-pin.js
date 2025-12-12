@@ -22,6 +22,7 @@ import IPFSRelays from './src/commands/ipfs-relays.js'
 import IPFSConnect from './src/commands/ipfs-connect.js'
 import WalletService from './src/commands/wallet-service.js'
 import DownloadFile from './src/commands/download-file.js'
+import DownloadCid from './src/commands/download-cid.js'
 import IPFSPinClaim from './src/commands/pin-claim.js'
 import PinStatus from './src/commands/pin-status.js'
 import PinRenew from './src/commands/pin-renew.js'
@@ -45,6 +46,7 @@ const ipfsPeers = new IPFSPeers()
 const ipfsRelays = new IPFSRelays()
 const ipfsConnect = new IPFSConnect()
 const downloadFile = new DownloadFile()
+const downloadCid = new DownloadCid()
 const walletService = new WalletService()
 const program = new Command()
 const ipfsPinClaim = new IPFSPinClaim()
@@ -135,10 +137,16 @@ program.command('ipfs-connect')
   .option('-d, --details', 'Get details about the peer')
   .action(ipfsConnect.run)
 
-program.command('file-download')
+program.command('download-file')
   .description('Download a file from IPFS to the files/ directory. This is for files that have a valid Pin Claim.')
   .option('-c, --cid <string>', 'CID of the file to download')
   .action(downloadFile.run)
+
+program.command('download-cid')
+  .description('Download a file from IPFS to the files/ directory. This is for files that have a valid Pin Claim.')
+  .option('-c, --cid <string>', 'CID of the file to download')
+  .option('-f, --filename <string>', 'File Name (required)')
+  .action(downloadCid.run)
 
 program.command('wallet-service')
   .description('Get information about the wallet service providers')

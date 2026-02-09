@@ -29,6 +29,7 @@ import PinRenew from './src/commands/pin-renew.js'
 import UnprocessedPins from './src/commands/unprocessed-pins.js'
 import IPFSRepin from './src/commands/reprocess.js'
 import IPFSPinUpload from './src/commands/pin-upload.js'
+import PinClaimFile from './src/commands/pin-claim-file.js'
 import ConsumerTest from './src/commands/consumer-test.js'
 
 // Instantiate the subcommands
@@ -55,6 +56,7 @@ const pinRenew = new PinRenew()
 const unprocessedPins = new UnprocessedPins()
 const ipfsRepin = new IPFSRepin()
 const ipfsPinUpload = new IPFSPinUpload()
+const pinClaimFile = new PinClaimFile()
 const consumerTest = new ConsumerTest()
 
 program
@@ -184,6 +186,13 @@ program.command('pin-upload')
   .description('Upload and pin a file to IPFS')
   .option('-f, --filename <string>', 'File Name (required)')
   .action(ipfsPinUpload.run)
+
+program.command('pin-claim-file')
+  .description('Upload a file to IPFS and generate a Pin Claim on the BCH blockchain')
+  .option('-f, --filename <string>', 'File Name in the files/ directory (required)')
+  .option('-n, --name <string>', 'Wallet name to pay for the pin claim (required)')
+  .action(pinClaimFile.run)
+
 program.command('consumer-test')
   .description('Test the consumer services')
   .action(consumerTest.run)
